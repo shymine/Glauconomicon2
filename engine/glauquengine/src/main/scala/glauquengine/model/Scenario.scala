@@ -1,4 +1,5 @@
 import Scenario.COUNTER
+import org.graalvm.compiler.phases.common.NodeCounterPhase.Stage
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -8,5 +9,9 @@ object Scenario {
 class Scenario(var title: String) {
     val id = COUNTER
     COUNTER+=1
-    val stages: ArrayBuffer[Stage] = ArrayBuffer[Stage]()
+    val stages: ArrayBuffer[(Stage, Int)] = ArrayBuffer[Stage]()
+
+    def addStage(stage: Stage): Unit = {
+        stages += (stage, stages.length)
+    }
 }
