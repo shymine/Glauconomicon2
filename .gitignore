@@ -2,6 +2,11 @@
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,angular
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,angular
 
+.idea/
+
+engine/engine/__pycache__/
+engine/glauc/migrations/
+
 ### Angular ###
 ## Angular ##
 # compiled output
