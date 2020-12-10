@@ -4,8 +4,10 @@
 
 .idea/
 
+engine/db.sqlite3
 engine/engine/__pycache__/
-engine/glauc/migrations/
+engine/engine/glauc/__pycache__/
+engine/engine/glauc/migrations/
 
 ### Angular ###
 ## Angular ##

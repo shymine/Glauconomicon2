@@ -21,6 +21,8 @@ from engine.glauc import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'scenario', views.ScenarioViewSet)
+router.register(r'stage', views.StageViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

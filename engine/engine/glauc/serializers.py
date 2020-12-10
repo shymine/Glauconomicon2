@@ -3,6 +3,15 @@ from rest_framework import serializers
 from engine.glauc.models import Stage, Scenario
 
 
+class ObjectRelatedField(serializers.RelatedField):
+
+    def to_representation(self, value):
+        """for foreign_key related field"""
+        if isinstance(value, Stage):
+            return value.id
+
+        raise Exception("Unexpected type of related field: {}" % value.type())
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -14,18 +23,18 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
-class StageSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Stage
-        fields = ['id', 'title', 'order', 'description']
-
-class ScenarioSerializer(serializers.HyperlinkedModelSerializer):
-    stages = serializers.StringRelatedField(many=True)
-    class Meta:
-        model = Scenario
-        fields = ['id', 'title', 'stages']
 
 class StageSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = Stage
         fields = ['id', 'title', 'description', 'order']
+
+
+class ScenarioSerializer(serializers.HyperlinkedModelSerializer):
+    # stages = StageSerializer(many=True) # use nested serializer
+    stages = serializers.StringRelatedField(many=True) # use the __str__ function
+
+    class Meta:
+        model = Scenario
+        fields = ['id', 'title', 'stages']
