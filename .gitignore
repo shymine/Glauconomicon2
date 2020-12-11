@@ -6,8 +6,8 @@
 
 engine/db.sqlite3
 engine/engine/__pycache__/
-engine/engine/glauc/__pycache__/
-engine/engine/glauc/migrations/
+engine/glauc/__pycache__/
+engine/glauc/migrations/
 
 ### Angular ###
 ## Angular ##
@@ -156,4 +156,4 @@ engine/.idea/codestream.xml
 
 .vscode/*
 
-env/*
+engine/venv/
