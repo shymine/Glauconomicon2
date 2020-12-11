@@ -8,6 +8,8 @@ import { VisualScenarioComponent } from './components/visual-scenario/visual-sce
 import { VisualStageComponent } from './components/visual-stage/visual-stage.component';
 import { CreateStageComponent } from './components/create-stage/create-stage.component';
 import { CreateScenarioComponent } from './components/create-scenario/create-scenario.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CreateScenarioComponent } from './components/create-scenario/create-sce
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
