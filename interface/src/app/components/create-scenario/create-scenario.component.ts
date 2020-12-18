@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { ScenarioService } from 'src/app/services/scenario.service';
 import { StageService } from 'src/app/services/stage.service';
+import { faSave, faCross } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-scenario',
@@ -11,14 +12,17 @@ import { StageService } from 'src/app/services/stage.service';
 })
 export class CreateScenarioComponent implements OnInit {
 
+  fa_save = faSave;
+  fa_close = faCross;
+
   scenario = {
     'title': '',
-    'stages': [] as any[]
+    'stages': [{
+      'title': '',
+      'description': ''
+    }]
   };
-  stage = {
-    'title': '',
-    'description': ''
-  };
+  sc_index = 0;
 
   submitted = false;
   error = '';
@@ -33,7 +37,7 @@ export class CreateScenarioComponent implements OnInit {
   }
 
   saveScenario(): void {
-    const data = {'title': this.scenario.title};
+    const data = {'title': this.scenario.title, 'stages': []};
 
     this.scenarioService.create(data).subscribe(response => {
       console.log(response);
@@ -54,9 +58,34 @@ export class CreateScenarioComponent implements OnInit {
   }
 
   addStage(): void {
-    
+    this.scenario.stages.push({
+      'title': '',
+      'description': ''
+    });
+    this.sc_index += 1;
   }
 
+  removeStage(): void {
+    if (this.scenario.stages.length > 1) {
+      this.scenario.stages.splice(this.sc_index, 1);
+      this.sc_index -= 1;
+    }
+  }
 
+  nextStage(): void {
+    if (this.sc_index < this.scenario.stages.length-1) {
+      this.sc_index += 1;
+    }
+  }
+
+  previousStage(): void {
+    if (this.sc_index > 0) {
+      this.sc_index -= 1;
+    }
+  }
+
+  goToStage(i: number): void {
+    this.sc_index = i;
+  }
 
 }

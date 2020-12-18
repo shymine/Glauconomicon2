@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div class="list row">
+    <div class="col-md-6">
+        <div class="row">
+            <h2>Scenarii: </h2>
+            <button class="m-3 btn btn-success"
+            routerLink="/create-scenario">
+                <fa-icon [icon]="plus_icon"></fa-icon>
+            </button>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item"
+                *ngFor="let scenario of scenarii; let i = index"
+                (click)="goToScenario(i)">
+                {{ scenario.title }}
+            </li>
+        </ul>
+    </div>
+</div>

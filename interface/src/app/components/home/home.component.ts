@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { ScenarioService } from 'src/app/services/scenario.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-home',
@@ -11,6 +13,7 @@ import { ScenarioService } from 'src/app/services/scenario.service';
 export class HomeComponent implements OnInit {
 
   scenarii: any[] = [];
+  plus_icon = faPlus;
 
   constructor(private scenarioService: ScenarioService,
     private dataService: DataService,
@@ -22,6 +25,17 @@ export class HomeComponent implements OnInit {
   }
 
   getScenario(): void {
+    /*
+    [{
+        "id": 1,
+        "title": "SuperScenar",
+        "stages": [2,3]
+      },{
+        "id": 2,
+        "title": "SuperScenar",
+        "stages": []
+      }]
+    */
     this.scenarioService.getAll().subscribe(
       data => {
         this.scenarii = data;
@@ -34,7 +48,8 @@ export class HomeComponent implements OnInit {
   }
 
   goToScenario(id: number): void {
-    this.dataService.set(id);
+    console.log("coucou ", id);
+    this.dataService.set(this.scenarii.find(s => s["id"] == id));
     this.router.navigate(['/visual-scenario']);
   }
 
