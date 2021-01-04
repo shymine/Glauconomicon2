@@ -42,10 +42,9 @@ export class CreateScenarioComponent implements OnInit {
     this.scenarioService.create(data).subscribe(response => {
       console.log(response);
       this.submitted = true;
-      this.scenario.stages.forEach(stage => {
+      this.scenario.stages.slice(0,this.scenario.stages.length-1).forEach(stage => {
         this.stageService.create(stage, response.id).subscribe(response => {
           console.log(response);
-          this.scenario.stages.push(response);
         }, error => {
           this.error = error;
           console.log(error);
