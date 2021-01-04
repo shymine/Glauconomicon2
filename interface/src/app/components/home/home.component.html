@@ -9,9 +9,13 @@
         </div>
         <ul class="list-group">
             <li class="list-group-item"
-                *ngFor="let scenario of scenarii; let i = index"
-                (click)="goToScenario(i)">
-                {{ scenario.title }}
+                *ngFor="let scenario of scenarii; let i = index">
+                <div (click)="goToScenario(i)">
+                    {{ scenario.title }}
+                </div>
+                <button class="btn btn-danger" (click)="deleteScenario(i)">
+                    <fa-icon [icon]="delete_icon"></fa-icon>
+                </button>
             </li>
         </ul>
     </div>

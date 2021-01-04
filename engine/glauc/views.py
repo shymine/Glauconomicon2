@@ -40,7 +40,7 @@ def scenario_detail(request, pk):
             serializer.save()
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request == 'DELETE':
+    elif request.method == 'DELETE':
         scenario.delete()
         return JsonResponse({'message': 'Scenario was successfully deleted'},
                             status=status.HTTP_204_NO_CONTENT)
