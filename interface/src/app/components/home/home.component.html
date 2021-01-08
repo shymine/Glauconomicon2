@@ -10,12 +10,19 @@
         <ul class="list-group">
             <li class="list-group-item"
                 *ngFor="let scenario of scenarii; let i = index">
-                <div (click)="goToScenario(i)">
-                    {{ scenario.title }}
+                <div class="row">
+                    <div class="col-md-9">
+                        <div (click)="goToScenario(scenario)">
+                            {{ scenario.title }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger" (click)="deleteScenario(i)">
+                            <fa-icon [icon]="delete_icon"></fa-icon>
+                        </button>
+                    </div>
                 </div>
-                <button class="btn btn-danger" (click)="deleteScenario(i)">
-                    <fa-icon [icon]="delete_icon"></fa-icon>
-                </button>
+
             </li>
         </ul>
     </div>

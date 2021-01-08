@@ -48,9 +48,8 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  goToScenario(id: number): void {
-    console.log("coucou ", id);
-    this.dataService.set(this.scenarii.find(s => s["id"] == id));
+  goToScenario(scenario: any): void {
+    this.dataService.set(scenario);
     this.router.navigate(['/visual-scenario']);
   }
 
