@@ -23,7 +23,7 @@ export class StageService {
     return this.http.post(`${baseUrl}/${sc_id}`, data);
   }
 
-  update(sc_id: number, id: number, data: number): Observable<any> {
+  update(sc_id: number, id: number, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/${sc_id}/${id}`, data);
   }
 

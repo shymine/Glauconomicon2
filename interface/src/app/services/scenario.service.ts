@@ -23,7 +23,7 @@ export class ScenarioService {
     return this.http.post(baseUrl, data);
   }
 
-  update(id: number, data: number): Observable<any> {
+  update(id: number, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
 

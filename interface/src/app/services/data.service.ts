@@ -7,13 +7,25 @@ export class DataService {
 
   data: any;
 
-  constructor() { }
+  constructor() {
+    this.data = undefined;
+  }
 
   set(item: any) {
     this.data = item;
   }
 
   get(): any {
-    return this.data;
+    const d = this.data;
+    this._reset();
+    return d;
+  }
+
+  _reset(): void {
+    this.data = undefined;
+  }
+
+  isPresent(): boolean {
+    return this.data!= undefined;
   }
 }
