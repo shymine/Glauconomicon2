@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { ScenarioService } from 'src/app/services/scenario.service';
 import { StageService } from 'src/app/services/stage.service';
-import { faPlus, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faPlus, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-scenario',
@@ -15,6 +15,7 @@ export class CreateScenarioComponent implements OnInit {
   fa_save = faSave;
   fa_close = faTrash;
   fa_plus = faPlus;
+  fa_eye = faEye;
 
   scenario = {
     'title': '',
@@ -135,15 +136,27 @@ export class CreateScenarioComponent implements OnInit {
     }
   }
 
-  visualize(): void {
-    // TODO: make it go to the visual-scenario and drop the unsaved elements
-    //       the scenario itself must be saved, otherwise, popup that say that it is
-    //       not saved and thus cannot be visualized
+  deleteScenario(): void {
+    if(!this.scenario.created) {
+      this.router.navigate(['/home']);
+    } else {
+      this.scenarioService.delete(this.scenario.id as unknown as number).subscribe(response => {
+        console.log(response);
+        this.router.navigate(['/home']);
+      });
+    }
+  }
 
+  visualize(): void {
+    if(!this.scenario.created) {
+      return;
+    }
+    this.saveScenario();
+    this.dataService.set(this.scenario.id);
+    this.router.navigate(['/visual-scenario']);
   }
 
   addStage(): void {
-
     this.scenario.stages.push({
       'title': '',
       'description': '',
@@ -152,7 +165,7 @@ export class CreateScenarioComponent implements OnInit {
       'created': false,
       'id': undefined
     });
-    this.sc_index += 1;
+    this.sc_index = this.scenario.stages.length-1;
   }
 
   removeStage(): void {
@@ -171,6 +184,30 @@ export class CreateScenarioComponent implements OnInit {
         this.scenario.stages.splice(this.sc_index, 1);
         this.sc_index -= 1;
         if (this.sc_index < 0) { this.sc_index = 0; }
+      }
+    } else {
+      const stg = this.scenario.stages[0];
+      if(stg.created) {
+        this.stageService.delete(this.scenario.id as unknown as number, stg.id as unknown as number).subscribe(response => {
+          console.log(response);
+          this.scenario.stages[0] = {
+            'title': '',
+            'description': '',
+            '_title': '',
+            '_description': '',
+            'created': false,
+            'id': undefined
+          };
+        });
+      } else {
+        this.scenario.stages[0] = {
+          'title': '',
+          'description': '',
+          '_title': '',
+          '_description': '',
+          'created': false,
+          'id': undefined
+        };
       }
     }
   }

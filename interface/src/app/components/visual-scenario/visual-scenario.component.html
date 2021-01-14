@@ -1,17 +1,20 @@
 <div class="row">
     <div class="col-md-10">
-        <h2>Title: {{scenario.title}}</h2>
+        <h2>{{scenario.title}}</h2>
+    </div>
+    <div class="col-md-1">
+        <button class="m-3 btn btn-primary" (click)="modify()"><fa-icon [icon]="fa_write"></fa-icon></button>
     </div>
 </div>
 <!--selected stage display-->
 <div class="row">
     <div class="col-md-10">
-        <h4>Stage title: {{scenario.stages[sc_index].title}}</h4>
+        <h4>{{scenario.stages[sc_index].title}}</h4>
     </div>
 </div>
 <div class="row">
     <div class="col-md-10">
-        <textarea readonly [(ngModel)]="scenario.stages[sc_index].description" rows="20" cols="50">
+        <textarea readonly [(ngModel)]="scenario.stages[sc_index].description" rows="20">
 
         </textarea>
     </div>

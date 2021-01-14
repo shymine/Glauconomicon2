@@ -1,14 +1,17 @@
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
         <h2>Title: </h2>
         <input type="text" class="form-control" [(ngModel)]="scenario.title">
     </div>
-    <div class="col-md-1"><button class="m-3 btn btn-primary" (click)="saveScenario()"><fa-icon [icon]="fa_save"></fa-icon></button></div>
-    <div class="col-md-1"><button class="m-3 btn btn-danger" routerLink="/home"><fa-icon [icon]="fa_close"></fa-icon></button></div>
+    <div class="col-md-1">
+        <button class="m-3 btn btn-primary" (click)="saveScenario()"><fa-icon [icon]="fa_save"></fa-icon></button>
+    </div>
+    <div class="col-md-1"><button class="m-3 btn btn-danger" (click)="deleteScenario()"><fa-icon [icon]="fa_close"></fa-icon></button></div>
+    <div class="col-md-1"><button class="m-3 btn btn-success" (click)="visualize()"><fa-icon [icon]="fa_eye"></fa-icon></button></div>
 </div>
 <!--selected stage display-->
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
         <h4>Stage title:</h4>
         <input type="text" class="form_control" [(ngModel)]="scenario.stages[sc_index].title">
     </div>
@@ -16,8 +19,8 @@
     <div class="col-md-1"><button class="m-3 btn btn-danger" (click)="removeStage()"><fa-icon [icon]="fa_close"></fa-icon></button></div>
 </div>
 <div class="row">
-    <div class="col-md-10">
-        <textarea [(ngModel)]="scenario.stages[sc_index].description" rows="20" cols="50">
+    <div class="col-md-9">
+        <textarea [(ngModel)]="scenario.stages[sc_index].description" rows="20">
 
         </textarea>
     </div>
