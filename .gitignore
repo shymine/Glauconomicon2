@@ -2,6 +2,15 @@
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,angular
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,angular
 
+.idea/
+
+
+engine/db.sqlite3
+engine/engine/__pycache__/
+engine/glauc/__pycache__/
+engine/glauc/__pycache__/*
+engine/glauc/migrations/
+
 ### Angular ###
 ## Angular ##
 # compiled output
@@ -146,3 +155,96 @@ engine/.idea/$CACHE_FILE$
 engine/.idea/codestream.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,angular
+
+.vscode/*
+
+engine/venv/
+
+
+# compiled output
+interface//dist
+interface//tmp
+interface//out-tsc
+# Only exists if Bazel was run
+interface//bazel-out
+
+# dependencies
+interface//node_modules
+
+# profiling files
+interface/chrome-profiler-events*.json
+interface/speed-measure-plugin*.json
+
+# IDEs and editors
+interface//.idea
+interface/.project
+interface/.classpath
+interface/.c9/
+interface/*.launch
+interface/.settings/
+interface/*.sublime-workspace
+
+# IDE - VSCode
+interface/.vscode/*
+interface/!.vscode/settings.json
+interface/!.vscode/tasks.json
+interface/!.vscode/launch.json
+interface/!.vscode/extensions.json
+interface/.history/*
+
+# misc
+interface//.sass-cache
+interface//connect.lock
+interface//coverage
+interface//libpeerconnection.log
+interface/npm-debug.log
+interface/yarn-error.log
+interface/testem.log
+interface/typings
+
+# System Files
+# compiled output
+interface/dist
+interface/tmp
+interface/out-tsc
+# Only exists if Bazel was run
+interface/bazel-out
+
+# dependencies
+interface/node_modules
+
+# profiling files
+interface/chrome-profiler-events*.json
+interface/speed-measure-plugin*.json
+
+# IDEs and editors
+interface/.idea
+interface/.project
+interface/.classpath
+interface/.c9/
+interface/*.launch
+interface/.settings/
+interface/*.sublime-workspace
+
+# IDE - VSCode
+interface/.vscode/*
+interface/!.vscode/settings.json
+interface/!.vscode/tasks.json
+interface/!.vscode/launch.json
+interface/!.vscode/extensions.json
+interface/.history/*
+
+# misc
+interface//.sass-cache
+interface//connect.lock
+interface//coverage
+interface//libpeerconnection.log
+interface/npm-debug.log
+interface/yarn-error.log
+interface/testem.log
+interface//typings
+
+# System Files
+interface/.DS_Store
+interface/Thumbs.db
+
