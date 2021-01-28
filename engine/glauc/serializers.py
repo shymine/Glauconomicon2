@@ -15,24 +15,17 @@ class ScenarioSerializer(serializers.ModelSerializer):
 class SheetFieldSerializer(serializers.ModelSerializer):
     class Meta:
         model = SheetField
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'section']
 
 class SheetListSerializer(serializers.ModelSerializer):
     class Meta:
         model = SheetList
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'section']
 
 class SheetTableSerializer(serializers.ModelSerializer):
     class Meta:
         model = SheetTable
-        fields = ['id', 'headers']
-
-class CharacterSheetSerializer(serializers.ModelSerializer):
-    fields = SheetFieldSerializer(many=True)
-
-    class Meta:
-        model = CharacterSheet
-        fields = ['id', 'name', 'sections', 'fields']
+        fields = ['id', 'headers', 'section']
 
 class SheetSectionSerializer(serializers.ModelSerializer):
     fields = SheetFieldSerializer(many=True)
@@ -41,9 +34,10 @@ class SheetSectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SheetSection
-        fields = ['id', 'name', 'fields', 'lists', 'tables']
+        fields = ['id', 'name', 'fields', 'lists', 'tables', 'sheet']
 
     def create(self, validated_data):
+        print("create: {}".format(validated_data))
         fields_data = validated_data.pop('fields')
         lists_data = validated_data.pop('lists')
         tables_data = validated_data.pop('tables')
@@ -77,3 +71,11 @@ class SheetSectionSerializer(serializers.ModelSerializer):
         for table in tables_data:
             SheetTable.objects.create(section=instance, **table)
         return instance
+
+
+class CharacterSheetSerializer(serializers.ModelSerializer):
+    sections = SheetSectionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CharacterSheet
+        fields = ['id', 'name', 'sections']

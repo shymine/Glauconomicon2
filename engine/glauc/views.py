@@ -137,23 +137,28 @@ def characterSheet_detail(request, pk):
 def sheetSection_list(request, cs_pk):
     try:
         characterSheet = CharacterSheet.objects.get(pk=cs_pk)
+        print("characterSheet: {}".format(characterSheet.__dict__))
     except:
         return JsonResponse({'message': 'The CharacterSheet {} does not exist'.format(cs_pk)},
                             status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
         sheetSection = SheetSection.objects.all()
-        stages = sheetSection.filter(sheet_id=cs_pk)
-        serializer = SheetSectionSerializer(stages, many=True)
+        print("sections: {}".format([s.__dict__ for s in sheetSection]))
+        sections = sheetSection.filter(sheet_id=cs_pk)
+        serializer = SheetSectionSerializer(sections, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        print("cs_pk: {}, int(): {}".format(cs_pk, int(cs_pk)))
+        print(data)
         data['sheet'] = int(cs_pk)
-        print("data: {}".format(data))
         serializer = SheetSectionSerializer(data=data)
         if serializer.is_valid():
+            print("serializer data: {}".format(serializer.validated_data))
             serializer.save()
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def sheetSection_detail(request, cs_pk, pk):
@@ -181,4 +186,16 @@ def sheetSection_detail(request, cs_pk, pk):
     elif request.method == 'DELETE':
         sheetSection.delete()
         return JsonResponse({'message': 'SheetSection was successfully deleted'},
+                            status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'DELETE'])
+def getAll_SheetSection(request):
+    if request.method == 'GET':
+        sections = SheetSection.objects.all()
+        serializer = SheetSectionSerializer(sections, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'DELETE':
+        for section in SheetSection.objects.all():
+            section.delete()
+        return JsonResponse({'message': 'SheetSections were successfully deleted'},
                             status=status.HTTP_204_NO_CONTENT)
