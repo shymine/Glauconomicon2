@@ -9,13 +9,17 @@ import { CreateScenarioComponent } from './components/create-scenario/create-sce
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CreateCharacSheetComponent } from './components/create-charac-sheet/create-charac-sheet.component';
+import { VisualCharacSheetComponent } from './components/visual-charac-sheet/visual-charac-sheet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     VisualScenarioComponent,
-    CreateScenarioComponent
+    CreateScenarioComponent,
+    CreateCharacSheetComponent,
+    VisualCharacSheetComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { ScenarioService } from 'src/app/services/scenario.service';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { CharacterSheetService } from 'src/app/services/character-sheet.service';
 
 
 @Component({
@@ -13,16 +14,19 @@ import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 export class HomeComponent implements OnInit {
 
   scenarii: any[] = [];
+  sheets: any[] = [];
   plus_icon = faPlus;
   delete_icon = faTrash;
 
   constructor(private scenarioService: ScenarioService,
     private dataService: DataService,
+    private characterSheetService: CharacterSheetService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getScenario();
+    this.getCharacterSheet();
   }
 
   getScenario(): void {
@@ -61,6 +65,54 @@ export class HomeComponent implements OnInit {
     error => {
       console.error(`Scenario ${this.scenarii[index]} is not deleted`);
       console.error(error);
+    });
+  }
+
+  getCharacterSheet(): void {
+    /*[{
+        "id": 1,
+        "name": "TestCharacSheet",
+        "sections": [{
+                "id": 2,
+                "name": "TestSheetSection",
+                "fields": [{
+                        "id": 2,
+                        "name": "TestField",
+                        "section": 2
+                    }],
+                "lists": [{
+                        "id": 2,
+                        "name": "testList",
+                        "section": 2
+                    }],
+                "tables": [{
+                        "id": 2,
+                        "headers": "h1,h2",
+                        "section": 2
+                    }],
+                "sheet": 1
+            }]
+    }]*/
+    this.characterSheetService.getAll().subscribe(data => {
+      this.sheets = data;
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  goToSheet(sheet: any): void {
+    this.dataService.set(sheet);
+    this.router.navigate(['/visual-sheet'])
+  }
+
+  deleteSheet(index: number): void {
+    this.characterSheetService.delete(this.sheets[index].id).subscribe(data => {
+      console.log(`Character Sheet ${this.sheets[index]} is deleted`);
+      this.getCharacterSheet();
+    }, error => {
+        console.error(`Character Sheet ${this.sheets[index]} is not deleted`);
+        console.error(error);
     });
   }
 

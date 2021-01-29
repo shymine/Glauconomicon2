@@ -26,4 +26,29 @@
             </li>
         </ul>
     </div>
+
+    <div class="col-md-6">
+        <div class="row">
+            <h2>Character Sheets: </h2>
+            <button class="m-3 btn btn-success" routerLink="/create-character-sheet">
+                <fa-icon [icon]="plus_icon"></fa-icon>
+            </button>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let sheet of sheets; let j = index">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div (click)="goToSheet(sheet)">
+                            {{ sheet.name }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger" (click)="deleteSheet(j)">
+                            <fa-icon [icon]="delete_icon"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
