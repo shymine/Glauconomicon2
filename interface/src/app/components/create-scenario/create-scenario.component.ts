@@ -58,7 +58,7 @@ export class CreateScenarioComponent implements OnInit {
           '_description': stage.description,
           'id': stage.id,
           'created': true
-        }
+        };
         this.scenario.stages.push(stg);
       });
     }
