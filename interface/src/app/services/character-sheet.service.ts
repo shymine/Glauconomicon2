@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const baseUrl = 'http://localhost:8000/api/charac_sheet'
+const baseUrl = '/api/charac_sheet'
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class CharacterSheetService {
           sheet.sections.forEach((section: any) => {
             section.tables = section.tables.map((table:any) => {
               let tmp = table;
-              tmp.headers = table.headers.split(",");
+              tmp.headers = table.headers.split(",").map((h: string) => {return {'name': h}});
               return tmp;
             });
           });
@@ -36,6 +36,7 @@ export class CharacterSheetService {
   }
 
   create(data: any): Observable<any> {
+    console.log("Create character sheet",data);
     return this.http.post(baseUrl, data);
   }
 
@@ -43,7 +44,7 @@ export class CharacterSheetService {
     data.sections.forEach((section: any) => {
       section.tables = section.tables.map((table: any) => {
         let tmp = table;
-        tmp.headers = table.headers.join(",");
+        tmp.headers = table.headers.map((h:any) => h.name).join(",");
         return tmp;
       });
     });

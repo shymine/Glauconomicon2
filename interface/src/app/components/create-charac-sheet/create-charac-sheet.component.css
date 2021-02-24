@@ -1,0 +1,27 @@
+.section {
+    border: 1px black dashed;
+    margin: 3%;
+    padding: 3%;
+}
+
+.element {
+    margin-top: 1%;
+}
+
+.btn-success {
+    width: 100%;
+}
+.btn-danger {
+    width: 100%;
+}
+.btn-primary {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+th {
+    border: 1px solid #ddd;
+    background-color: lightblue;
+}

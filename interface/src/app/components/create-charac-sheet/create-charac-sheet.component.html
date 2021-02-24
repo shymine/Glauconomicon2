@@ -1,1 +1,113 @@
-<p>create-charac-sheet works!</p>
+<div class="row">
+    <div class="col-md-9">
+        <h2>Name: </h2>
+        <input type="text" class="form-control" [(ngModel)]="characSheet.name">
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-primary" (click)="saveSheet()"><fa-icon [icon]="fa_save"></fa-icon></button>
+    </div>
+    <div class="col-md-1"><button class="btn btn-danger" (click)="deleteSheet()"><fa-icon [icon]="fa_close"></fa-icon></button></div>
+    <div class="col-md-1"><button class="btn btn-success" (click)="visualize()"><fa-icon [icon]="fa_eye"></fa-icon></button></div>
+</div>
+<!--Character sheet display-->
+<div class="row section" *ngFor="let section of characSheet.sections; let i=index">
+
+    <div class="col-md-4">
+        <h3><input type="text" class="form-control" [(ngModel)]="characSheet.sections[i].name"> </h3>
+    </div>
+
+    <div class="col-md-1 offset-md-5" (click)="removeSection(i)">
+        <div class="btn btn-danger">
+            <fa-icon [icon]="fa_close"></fa-icon>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row element" *ngFor="let field of section.fields; let f=index">
+            <div class="col-md-11"><input type="text" class="form-control" [(ngModel)]="field.name"></div>
+            <div class="col-md-1" (click)="removeField(i,f)">
+                <div class="btn btn-danger">
+                    <fa-icon [icon]="fa_close"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" (click)="addField(i)">
+                <div class="btn btn-success">
+                    <a>Add Field</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row element" *ngFor="let list of section.lists; let l=index">
+            <div class="col-md-11">
+                <table>
+                    <th>
+                        <input type="text" class="form-control" [(ngModel)]="list.name">
+                    </th>
+                </table>
+            </div>
+            <div class="col-md-1" (click)="removeList(i,l)">
+                <div class="btn btn-danger">
+                    <fa-icon [icon]="fa_close"></fa-icon>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" (click)="addList(i)">
+                <div class="btn btn-success">
+                    <a>Add List</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row element" *ngFor="let table of section.tables; let t=index">
+            <div class="col-md-11">
+                <div class="row">
+                    <table class="col-md-10">
+                        <th *ngFor="let header of table.headers; let h=index">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" [(ngModel)]="table.headers[h].name">
+                                </div>
+                                <div class="col-md-3" (click)="removeHeader(i,t,h)">
+                                    <div class="btn btn-danger">
+                                        <fa-icon [icon]="fa_close"></fa-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </table>
+                    
+                    <div class="col-md-2" (click)="addHeader(i, t)">
+                        <div class=" btn btn-success">
+                            <a>Add header</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1" (click)="removeTable(i,t)">
+                <div class="btn btn-danger">
+                    <fa-icon [icon]="fa_close"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" (click)="addTable(i)">
+                <div class="btn btn-success">
+                    <a>Add Table</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6" (click)="addSection()">
+        <div class="btn btn-success">
+            <a>Add Section</a>
+        </div>
+    </div>
+</div>
