@@ -44,10 +44,10 @@ export class HomeComponent implements OnInit {
     this.scenarioService.getAll().subscribe(
       data => {
         this.scenarii = data;
-        console.log(data);
+        console.log("getAll scenario",data);
       },
       error => {
-        console.log(error);
+        console.log("getAll scenario",error);
       }
     )
   }
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
                     }],
                 "tables": [{
                         "id": 2,
-                        "headers": "h1,h2",
+                        "headers": ["h1","h2"],
                         "section": 2
                     }],
                 "sheet": 1
@@ -95,9 +95,9 @@ export class HomeComponent implements OnInit {
     }]*/
     this.characterSheetService.getAll().subscribe(data => {
       this.sheets = data;
-      console.log(data);
+      console.log("getAll sheets",data);
     }, error => {
-      console.log(error);
+      console.log("getAll sheets",error);
     });
   }
 
