@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const baseUrl = 'localhost:8000/api/sheet_section'
+const baseUrl = '/api/sheet_section' //'localhost:8000/api/sheet_section'
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class SheetSectionsService {
           const tmp = data.tables.map((table: any) => {
             table.headers.split(",");
           });
-          console.log(tmp);
+          console.log("getall", tmp);
           data.tables = tmp;
         });
         observer.next(datas);
@@ -33,7 +33,7 @@ export class SheetSectionsService {
       this.http.get(`${baseUrl}/${sc_id}/${id}`).subscribe((data:any) => {
         const tmp = data.tables.map((table: any) => {
           let tab = table;
-          tab.headers = table.headers.split(",");
+          tab.headers = table.headers.split(",").map((h:string) => {return {"name": h}});
           return tab;
         });
         console.log(tmp);
@@ -47,11 +47,13 @@ export class SheetSectionsService {
   }
 
   create(data: any, sc_id: number): Observable<any> {
+    console.log("create section", "before join", data);
     data.tables = data.tables.map((table:any) => {
       let tmp = table;
-      tmp.headers = table.headers.join(",");
+      tmp.headers = table.headers.map((h: any) => h['name']).join(",");
       return tmp;
     });
+    console.log("create section", "after join", JSON.stringify(data));
     return this.http.post(`${baseUrl}/${sc_id}`, data);
   }
 
